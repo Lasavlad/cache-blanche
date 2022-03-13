@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Blog{% endblock %}
+
+{% block content %}
+
+    <div class="container my-5 px-2">
+        <div class="row">
+            <div class="col text-center">
+                <h1>Cache Blanche blogs</h1>
+            </div>
+        </div>
+        {% if blogs %}
+            <div class="row my-5">
+                
+                    {% for blog in blogs %}
+                        <div class="col-4">
+                            <div class="card text-center mx-0 py-3 my-3">
+                               <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="{% url 'blog-detail' blog.id %}">{{ blog.title }}</a>
+                                </h5>
+                                <p class="card-text">{{ blog.body|slice:":100" }}</p> 
+                                <p class="card-text"><small class="text-muted">Date posted: {{ blog.date_of_post }}</small></p>
+                               </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+            </div>
+        {% else %}
+            <div class="row">
+                <div class="col text-center">
+                    <p>There are no blog</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
